@@ -21,8 +21,7 @@ export default function SelectTags({ SetTags, selectedTags }: Props) {
                     if (e.target.checked === true) {
                       SetTags((prev) => [...prev, tag]);
                     } else {
-                      const index = selectedTags.indexOf(tag);
-                      selectedTags.splice(index, 1);
+                      SetTags((prev) => prev.filter((t) => t !== tag));
                     }
                   }}
                 />

@@ -1,8 +1,8 @@
 type Props = {
-    value: number
+    value: number | string
 }
 export default function TableRow({value}: Props){
     return (
-        <td>{value || 'N/A'}</td>
+        <td>{value}</td>
     )
 }

@@ -4,8 +4,9 @@ import TableRow from '../TableRow/TableRow';
 type Props = {
   data: Record<string, Country>;
   selectedTags: Tag[];
+  year: number;
 };
-export default function Table({ data, selectedTags }: Props) {
+export default function Table({ data, selectedTags, year }: Props) {
   return (
     <table>
       <thead>
@@ -19,7 +20,12 @@ export default function Table({ data, selectedTags }: Props) {
       </thead>
       <tbody>
         {Object.entries(data).map(([key, value]) => {
-          const LastYear = data[key].data.length - 1;
+          const YearIndex = data[key].data.length - 1;
+
+          const YearInfo = year
+            ? value.data.find((country) => country.year === year)
+            : value.data[YearIndex];
+          console.log(YearInfo);
           return (
             <tr key={key}>
               <td>{key}</td>
@@ -30,7 +36,7 @@ export default function Table({ data, selectedTags }: Props) {
                 return (
                   <TableRow
                     key={tag}
-                    value={value.data[LastYear][tag]}
+                    value={YearInfo?.[tag] || 'N/A'}
                   ></TableRow>
                 );
               })}
