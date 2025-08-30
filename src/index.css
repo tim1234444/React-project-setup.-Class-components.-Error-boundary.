@@ -210,7 +210,7 @@ input[type='checkbox'] {
   transform: scale(1.5);
   cursor: pointer;
 }
-.year-input {
+.year-input, .search-country__input {
   width: 200px;
   padding: 10px 14px;
   font-size: 16px;
@@ -231,7 +231,7 @@ input[type='checkbox'] {
   border: 1px solid #999;
   box-shadow: 0 0 5px rgba(150, 150, 150, 0.5);
 }
-.year-input-container {
+.year-input-container, .search-country{
   display: flex;
   gap: 10px;
   align-items: center;
@@ -239,4 +239,28 @@ input[type='checkbox'] {
 .header__container{
   display: flex;
   gap: 15px;
+}
+.sort-button {
+  margin-left: 12px;
+  
+ 
+  
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s;
+}
+
+
+
+.sort-arrow {
+  font-size: 12px;
+  display: inline-block;
+  transition: transform 0.3s;
+}
+
+.sort-arrow.ascending {
+  transform: rotate(180deg);
 }

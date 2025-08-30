@@ -8,8 +8,10 @@ import Header from '../components/Header';
 
 const dataPromise = fetchData();
 export default function CounrtyTable() {
+  const data: Record<string, Country> = use(dataPromise);
+  const [filteredData, SetFilteredData] = useState(data);
   const [isOpen, SetIsOpen] = useState(false);
-  const [year, setYear] = useState<number>(0);
+  const [year, setYear] = useState<number>(2023);
 
   const [tags, SetTags] = useState<Tag[]>([
     'year',
@@ -17,17 +19,19 @@ export default function CounrtyTable() {
     'co2',
     'co2_per_capita',
   ]);
-
-  const data: Record<string, Country> = use(dataPromise);
-
-  console.log(data);
   return (
     <>
-      <Header SetIsOpen={SetIsOpen} setYear={setYear}></Header>
+      <Header
+        year={year}
+        allCountry={data}
+        SetIsOpen={SetIsOpen}
+        setYear={setYear}
+        SetFilteredData={SetFilteredData}
+      ></Header>
 
       <section className="table">
         <div className="table__container">
-          <Table year={year} selectedTags={tags} data={data}></Table>
+          <Table year={year} selectedTags={tags} data={filteredData}></Table>
         </div>
       </section>
 

@@ -20,12 +20,11 @@ export default function Table({ data, selectedTags, year }: Props) {
       </thead>
       <tbody>
         {Object.entries(data).map(([key, value]) => {
-          const YearIndex = data[key].data.length - 1;
+          
 
-          const YearInfo = year
-            ? value.data.find((country) => country.year === year)
-            : value.data[YearIndex];
-          console.log(YearInfo);
+          const YearInfo = value.data.find((country) => country.year === year)
+           
+          
           return (
             <tr key={key}>
               <td>{key}</td>
