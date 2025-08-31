@@ -1,60 +1,17 @@
-import { useState } from 'react';
-import type { Country } from '../type/type';
-
 type Props = {
-  setYear: React.Dispatch<React.SetStateAction<number>>;
+  ascending: boolean;
   SetIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  SetFilteredData: React.Dispatch<
-    React.SetStateAction<Record<string, Country>>
-  >;
-  allCountry: Record<string, Country>;
-  year: number;
+  handleChangeSort: () => void;
+  handleChangeCountry: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChangeYear: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 export default function Header({
-  setYear,
+  ascending,
   SetIsOpen,
-  SetFilteredData,
-  allCountry,
- 
-  year
+  handleChangeSort,
+  handleChangeCountry,
+  handleChangeYear,
 }: Props) {
-  const [ascending, setAscending] = useState(false);
-  const handleSort = () => {
-    SetFilteredData((prev) => {
-      const sortedEntries = Object.fromEntries(
-        Object.entries(prev).sort((a, b) => {
-          const popA =
-            a[1].data.find((el: { year: number }) => el.year === year)
-              ?.population || 0;
-          const popB =
-            b[1].data.find((el: { year: number }) => el.year === year)
-              ?.population || 0;
-
-          return ascending ? popA - popB : popB - popA;
-        }),
-      );
-
-      return sortedEntries;
-    });
-    setAscending(!ascending);
-  };
-  const handleChangeYear = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (+value >= 1750 && +value <= 2023) {
-      setYear(+value);
-    }
-  };
-  const handleChangeCountry = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    SetFilteredData(() => {
-      const filteredData = Object.fromEntries(
-        Object.entries(allCountry).filter(([country]) =>
-          country.toLowerCase().includes(value.toLowerCase()),
-        ),
-      );
-      return filteredData;
-    });
-  };
   return (
     <header className="header">
       <div className="header__container">
@@ -88,7 +45,7 @@ export default function Header({
           />
         </div>
         <div className="sortByPopulation">
-          <button className="sort-button" onClick={handleSort}>
+          <button className="sort-button" onClick={handleChangeSort}>
             Sort by Population
             <span className={`sort-arrow ${ascending ? 'ascending' : ''}`}>
               ▲

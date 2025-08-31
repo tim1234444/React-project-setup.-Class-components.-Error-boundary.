@@ -1,12 +1,12 @@
+import { memo } from 'react';
 import type { Country, Tag } from '../../../type/type';
 import TableRow from '../TableRow/TableRow';
 
 type Props = {
   data: Record<string, Country>;
   selectedTags: Tag[];
-  year: number;
 };
-export default function Table({ data, selectedTags, year }: Props) {
+function Table({ data, selectedTags }: Props) {
   return (
     <table>
       <thead>
@@ -20,11 +20,8 @@ export default function Table({ data, selectedTags, year }: Props) {
       </thead>
       <tbody>
         {Object.entries(data).map(([key, value]) => {
-          
+          const YearInfo = value.yearInfo;
 
-          const YearInfo = value.data.find((country) => country.year === year)
-           
-          
           return (
             <tr key={key}>
               <td>{key}</td>
@@ -34,7 +31,7 @@ export default function Table({ data, selectedTags, year }: Props) {
               {selectedTags.map((tag) => {
                 return (
                   <TableRow
-                    key={tag}
+                    key={tag + '_' + key}
                     value={YearInfo?.[tag] || 'N/A'}
                   ></TableRow>
                 );
@@ -46,3 +43,4 @@ export default function Table({ data, selectedTags, year }: Props) {
     </table>
   );
 }
+export default memo(Table);

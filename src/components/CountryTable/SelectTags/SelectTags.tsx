@@ -1,9 +1,10 @@
+import { memo } from 'react';
 import type { Tag } from '../../../type/type';
 type Props = {
-  SetTags: React.Dispatch<React.SetStateAction<Tag[]>>;
+  toggleTag: (tag: Tag, checked: boolean) => void;
   selectedTags: Tag[];
 };
-export default function SelectTags({ SetTags, selectedTags }: Props) {
+function SelectTags({ toggleTag, selectedTags }: Props) {
   const tags: Tag[] = ['methane', 'oil_co2', 'temperature_change_from_co2'];
   return (
     <div className="select-tags">
@@ -17,13 +18,7 @@ export default function SelectTags({ SetTags, selectedTags }: Props) {
                 <input
                   type="checkbox"
                   checked={selectedTags.includes(tag)}
-                  onChange={(e) => {
-                    if (e.target.checked === true) {
-                      SetTags((prev) => [...prev, tag]);
-                    } else {
-                      SetTags((prev) => prev.filter((t) => t !== tag));
-                    }
-                  }}
+                  onChange={(e) => toggleTag(tag, e.target.checked)}
                 />
               </label>
             </li>
@@ -33,3 +28,4 @@ export default function SelectTags({ SetTags, selectedTags }: Props) {
     </div>
   );
 }
+export default memo(SelectTags);

@@ -1,8 +1,11 @@
+import { memo } from "react"
+
 type Props = {
     value: number | string
 }
-export default function TableRow({value}: Props){
+function TableRow({value}: Props){
     return (
         <td>{value}</td>
     )
 }
+export default memo(TableRow)
