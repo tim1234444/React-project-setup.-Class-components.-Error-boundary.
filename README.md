@@ -1,69 +1,131 @@
-# React + TypeScript + Vite
+## Performance Profiling
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Initial profiling was performed using **React DevTools Profiler**.
 
-Currently, two official plugins are available:
+- **Tested interactions:**
+  - Sorting a column
+  - Searching for a country
+  - Selecting a year
+  - Adding/removing columns
+  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+ ## Before optimization
 
-## Expanding the ESLint configuration
+  ### - Sorting a column:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+  - **Commit Duration: 2.1s**
+  - **Render Duration: 194.8ms**
+  - **Interactions:** Not recorded (Profiler did not capture explicit interactions, but commit and render times were analyzed instead)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### - Screenshots:
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+#### Flame Graph for sorting
+![Profiler Flame Graph](docs/images/flame-sort-before.png)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+#### Ranked Chart for sorting
+![Profiler Ranked Chart](docs/images/ranked-sort-before.png)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+  ### - Searching for a country:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+  - **Commit Duration: 2.5s**
+  - **Render Duration: 108.2ms**
+  - **Interactions:** Not recorded (Profiler did not capture explicit interactions, but commit and render times were analyzed instead)
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+### - Screenshots:
+
+#### Flame Graph for search
+![Profiler Flame Graph](docs/images/flame-search-before.png)
+
+#### Ranked Chart for search
+![Profiler Ranked Chart](docs/images/ranked-search-before.png)
+
+  ### - Selecting a year:
+
+  - **Commit Duration: 3.2s**
+  - **Render Duration: 107.4ms**
+  - **Interactions:** Not recorded (Profiler did not capture explicit interactions, but commit and render times were analyzed instead)
+
+### - Screenshots:
+
+#### Flame Graph for year
+![Profiler Flame Graph](docs/images/flame-year-before.png)
+
+#### Ranked Chart for year
+![Profiler Ranked Chart](docs/images/ranked-year-before.png)
+
+  ### - Adding/removing columns:
+
+  - **Commit Duration: 1s**
+  - **Render Duration: 51.2ms**
+  - **Interactions:** Not recorded (Profiler did not capture explicit interactions, but commit and render times were analyzed instead)
+
+### - Screenshots:
+
+#### Flame Graph for columns
+![Profiler Flame Graph](docs/images/flame-column-before.png)
+
+#### Ranked Chart for columns
+![Profiler Ranked Chart](docs/images/ranked-column-before.png)
+
+
+ ## After optimization
+
+  ### - Sorting a column:
+
+  - **Commit Duration: 2.4s**
+  - **Render Duration: 114.2ms**
+  - **Interactions:** Not recorded (Profiler did not capture explicit interactions, but commit and render times were analyzed instead)
+
+### - Screenshots:
+
+#### Flame Graph for sorting
+![Profiler Flame Graph](docs/images/flame-sort-after.png)
+
+#### Ranked Chart for sorting
+![Profiler Ranked Chart](docs/images/ranked-sort-after.png)
+
+  ### - Searching for a country:
+
+  - **Commit Duration: 2.2s**
+  - **Render Duration: 76.4ms**
+  - **Interactions:** Not recorded (Profiler did not capture explicit interactions, but commit and render times were analyzed instead)
+
+### - Screenshots:
+
+#### Flame Graph for search
+![Profiler Flame Graph](docs/images/flame-search-after.png)
+
+#### Ranked Chart for search
+![Profiler Ranked Chart](docs/images/ranked-search-after.png)
+
+  ### - Selecting a year:
+
+  - **Commit Duration: 2.8s**
+  - **Render Duration: 214.1ms**
+  - **Interactions:** Not recorded (Profiler did not capture explicit interactions, but commit and render times were analyzed instead)
+
+### - Screenshots:
+
+#### Flame Graph for year
+![Profiler Flame Graph](docs/images/flame-year-after.png)
+
+#### Ranked Chart for year
+![Profiler Ranked Chart](docs/images/ranked-year-after.png)
+
+  ### - Adding/removing columns:
+
+  - **Commit Duration: 0.9s**
+  - **Render Duration: 13.3ms**
+  - **Interactions:** Not recorded (Profiler did not capture explicit interactions, but commit and render times were analyzed instead)
+
+### - Screenshots:
+
+#### Flame Graph for columns
+![Profiler Flame Graph](docs/images/flame-column-after.png)
+
+#### Ranked Chart for columns
+![Profiler Ranked Chart](docs/images/ranked-column-after.png)
+
+---
+
+> As you can see, memoization mainly helped to improve sorting by year and country name. If I have time, I will definitely use an additional strategy and improve the rendering result.

@@ -21,11 +21,11 @@ a {
 a:hover {
   color: #535bf2;
 }
-
+.header {
+  padding: 20px;
+}
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -49,10 +49,6 @@ button {
 button:hover {
   border-color: #646cff;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -65,4 +61,206 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #6ebeff;
+  border-bottom-color: #337ab7;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.spinner__container {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+.table {
+  padding: 20px;
+  overflow-x: auto;
+}
+
+.table__container {
+  max-width: 100%;
+}
+
+.table__container table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: system-ui, sans-serif;
+  font-size: 14px;
+}
+
+.table__container thead {
+  background-color: #f5f5f5;
+}
+
+.table__container th,
+.table__container td {
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.table__container th {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.table__container tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.table__container tbody tr:hover {
+  background-color: #f0f7ff;
+}
+.spinner__container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.select-tags__container {
+  flex-direction: column;
+
+  display: flex;
+  justify-content: center;
+}
+.select-tags__title {
+  font-weight: 600;
+  font-size: 16px;
+}
+.select-tags__list {
+  display: flex;
+  min-width: 350px;
+  padding: 0;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+}
+.select-tags__block {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+}
+
+.modal-overlay {
+  align-items: center;
+  position: fixed;
+  padding: 30px 0px;
+  inset: 0;
+  width: 100vw;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+
+  z-index: 1000;
+
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+  padding: 20px 30px;
+  position: relative;
+  height: fit-content;
+  transform: translateY(-20px);
+  animation: slideDown 0.3s forwards;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  to {
+    transform: translateY(0);
+  }
+}
+input[type='checkbox'] {
+  width: 10px;
+  height: 10px;
+  transform: scale(1.5);
+  cursor: pointer;
+}
+.year-input, .search-country__input {
+  width: 200px;
+  padding: 10px 14px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+
+  outline: none;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.year-input::-webkit-outer-spin-button,
+.year-input::-webkit-inner-spin-button {
+  margin: 0;
+}
+
+.year-input:focus {
+  border: 1px solid #999;
+  box-shadow: 0 0 5px rgba(150, 150, 150, 0.5);
+}
+.year-input-container, .search-country{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.header__container{
+  display: flex;
+  gap: 15px;
+}
+.sort-button {
+  margin-left: 12px;
+  
+ 
+  
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s;
+}
+
+
+
+.sort-arrow {
+  font-size: 12px;
+  display: inline-block;
+  transition: transform 0.3s;
+}
+
+.sort-arrow.ascending {
+  transform: rotate(180deg);
 }
